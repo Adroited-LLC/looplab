@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>LoopLab 0.4.0</title>
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script type="module" src="/src/main.ts" defer></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Top bar ──────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="logo">
+      <img class="logo-icon" src="/icon.png" alt="LoopLab" />
+      <span class="logo-text">LoopLab</span>
+    </div>
+    <span id="filename">Drop or open an audio file…</span>
+    <div class="topbar-btns">
+      <button class="btn" id="transcribe-btn">Transcribe guitar</button>
+      <button class="btn" id="recent-btn">Recent ▾</button>
+      <button class="btn btn-primary" id="open-btn">Open File</button>
+    </div>
+  </header>
+
+  <!-- ── Waveform ──────────────────────────────────────────────────────── -->
+  <section class="waveform-section">
+    <div id="waveform"></div>
+    <div id="drop-overlay">
+      <p>Drop audio file here</p>
+    </div>
+  </section>
+
+  <!-- ── Transport ─────────────────────────────────────────────────────── -->
+  <section class="transport">
+    <button class="btn-icon" id="stop-btn"         title="Stop (Esc)">⏹</button>
+    <button class="btn-icon" id="skip-back-btn"    title="Back 5s (←)" aria-label="Back 5 seconds">−5s</button>
+    <button class="btn-icon" id="play-btn"         title="Play / Pause (Space)">▶</button>
+    <button class="btn-icon" id="skip-forward-btn" title="Forward 5s (→)" aria-label="Forward 5 seconds">+5s</button>
+
+    <div class="seek-bar-wrap">
+      <span class="time-display">
+        <span id="current-time">0:00.000</span>
+        <span class="time-sep">/</span>
+        <span id="total-time">0:00.000</span>
+      </span>
+      <input type="range" id="seek-bar" min="0" max="1000" value="0" step="1" />
+    </div>
+
+    <button class="btn-icon" id="zoom-out-btn" title="Zoom Out ([)">⊖</button>
+    <button class="btn-icon" id="zoom-in-btn"  title="Zoom In (])">⊕</button>
+  </section>
+
+  <!-- ── Panels ────────────────────────────────────────────────────────── -->
+  <div class="panels-grid">
+
+    <!-- Speed -->
+    <div class="panel">
+      <h3 class="panel-title">Speed</h3>
+      <div class="panel-body">
+        <div class="row" style="justify-content:center;gap:8px;">
+          <button class="step-btn" id="speed-down">−</button>
+          <span class="value-display" id="speed-value">100%</span>
+          <button class="step-btn" id="speed-up">+</button>
+        </div>
+        <input type="range" id="speed-slider" min="10" max="200" value="100" step="5" />
+        <div class="preset-row">
+          <button class="preset-btn" data-speed="50">50%</button>
+          <button class="preset-btn" data-speed="75">75%</button>
+          <button class="preset-btn active" data-speed="100">100%</button>
+          <button class="preset-btn" data-speed="125">125%</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pitch -->
+    <div class="panel">
+      <h3 class="panel-title">Pitch</h3>
+      <div class="panel-body">
+        <div class="row" style="justify-content:center;gap:8px;">
+          <button class="step-btn" id="semitone-down">−</button>
+          <span class="value-display" id="semitone-value">0 st</span>
+          <button class="step-btn" id="semitone-up">+</button>
+        </div>
+        <input type="range" id="semitone-slider" min="-12" max="12" value="0" step="1" />
+        <div class="col" style="gap:3px;">
+          <span class="label-sm">Fine tune</span>
+          <div class="row" style="justify-content:center;gap:6px;">
+            <button class="step-btn sm" id="cents-down">−</button>
+            <span class="value-display sm" id="cents-value">0 ¢</span>
+            <button class="step-btn sm" id="cents-up">+</button>
+          </div>
+          <input type="range" id="cents-slider" min="-100" max="100" value="0" step="1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- A/B Loop -->
+    <div class="panel">
+      <h3 class="panel-title">A / B Loop</h3>
+      <div class="panel-body">
+        <div class="ab-row">
+          <button class="btn btn-sm" id="set-a-btn">Set A</button>
+          <span class="ab-time" id="loop-a-time">--:--</span>
+          <span class="ab-arrow">→</span>
+          <span class="ab-time" id="loop-b-time">--:--</span>
+          <button class="btn btn-sm" id="set-b-btn">Set B</button>
+        </div>
+        <div class="row row-space">
+          <span class="label-sm">Loop</span>
+          <div class="toggle" id="loop-toggle">
+            <input type="checkbox" id="loop-checkbox" />
+            <span class="toggle-slider"></span>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="clear-loop-btn" style="width:100%">Clear</button>
+      </div>
+    </div>
+
+    <!-- Mix -->
+    <div class="panel">
+      <h3 class="panel-title">Mix</h3>
+      <div class="panel-body">
+        <div class="col" style="gap:3px;">
+          <div class="row row-space">
+            <span class="label-sm">Volume</span>
+            <span class="label-sm" id="volume-value">100%</span>
+          </div>
+          <input type="range" id="volume-slider" min="0" max="150" value="100" step="1" />
+        </div>
+        <div class="col" style="gap:3px;">
+          <div class="row row-space">
+            <span class="label-sm">Pan</span>
+            <span class="label-sm" id="pan-value">C</span>
+          </div>
+          <input type="range" id="pan-slider" min="-100" max="100" value="0" step="1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- BPM / Metronome -->
+    <div class="panel">
+      <h3 class="panel-title">BPM / Metronome</h3>
+      <div class="panel-body">
+        <div class="row" style="justify-content:center;gap:6px;">
+          <button class="step-btn" id="bpm-down">−</button>
+          <input type="number" id="bpm-input" value="120" min="20" max="300" />
+          <button class="step-btn" id="bpm-up">+</button>
+          <button class="btn btn-sm" id="tap-btn" title="Tap Tempo (T)">TAP</button>
+        </div>
+        <div class="row row-space">
+          <span class="label-sm">Time sig</span>
+          <select id="beats-per-bar">
+            <option value="3">3/4</option>
+            <option value="4" selected>4/4</option>
+            <option value="5">5/4</option>
+            <option value="6">6/8</option>
+          </select>
+        </div>
+        <div class="row row-space">
+          <span class="label-sm">Metronome</span>
+          <div class="toggle" id="metro-toggle">
+            <input type="checkbox" id="metro-checkbox" />
+            <span class="toggle-slider"></span>
+          </div>
+        </div>
+        <div class="col" style="gap:3px;">
+          <span class="label-sm">Click volume</span>
+          <input type="range" id="metro-vol" min="0" max="100" value="80" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Markers -->
+    <div class="panel">
+      <h3 class="panel-title">Markers</h3>
+      <div class="panel-body">
+        <div class="row" style="gap:6px;">
+          <button class="btn btn-sm btn-accent" id="add-marker-btn" style="flex:1">+ Add (M)</button>
+          <button class="btn btn-sm"            id="clear-markers-btn">Clear</button>
+        </div>
+        <div id="markers-list" class="markers-list"></div>
+      </div>
+    </div>
+
+  </div><!-- /panels-grid -->
+
+  <!-- ── Recent files (fly-out) ─────────────────────────────────────────── -->
+  <div id="recent-panel">
+    <h3>Recent Files</h3>
+    <div id="recent-list"></div>
+  </div>
+
+  <!-- ── Status bar ────────────────────────────────────────────────────── -->
+  <footer class="statusbar">
+    <span id="status-msg">Drop or open an audio file to get started</span>
+    <span class="shortcuts-hint">Space Play · A/B Loop · M Marker · T Tap · [ ] Zoom</span>
+  </footer>
+
+</div><!-- /#app -->
+</body>
+</html>

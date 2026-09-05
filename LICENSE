@@ -1,0 +1,72 @@
+LoopLab Free Distribution License, Version 1.0
+
+Copyright (c) 2026 Matt Hoffer / Adroited LLC
+
+This is a custom source-available license. It is not the GNU GPL and does
+not grant unrestricted commercial distribution rights.
+
+1. Scope
+"Software" means the original LoopLab code, documentation, and assets
+provided under this license, including modifications of that material.
+Separately licensed third-party components are excluded; their own
+licenses govern them. See THIRD_PARTY_NOTICES.md.
+
+2. Permission
+Subject to these terms, you may use, copy, study, modify, and distribute
+the Software, in source or executable form, without a license fee. You
+may incorporate the Software into applications made available without
+payment, subject to sections 3 and 4.
+
+3. No paid applications or paid distribution
+Without separate written permission from the copyright holders, you may
+not sell, rent, sublicense for a fee, or otherwise charge for access to
+or use of the Software or a modified version. You may not incorporate
+any of the Software into an application, plugin, service, subscription,
+or bundle for which users must pay to obtain access or functionality,
+including applications with paid tiers or paid feature unlocks.
+
+You may use the Software in your work, teaching, performances, or music
+production, including paid work. This license does not restrict selling
+music, lessons, or other output created using the Software. Voluntary
+donations are permitted if payment grants no exclusive software access
+or functionality. Rights in recordings and other user content remain
+with their respective owners.
+
+4. Distribution and source availability
+When distributing the Software or modifications, retain this license
+and existing copyright and attribution notices, identify your changes,
+and provide the corresponding source code of the Software, including
+your modifications and the scripts needed to build it, at no charge to
+recipients. You may provide that source with the distribution or at a
+clearly identified, accessible download location maintained for as long
+as you distribute that version.
+
+Your modifications to the Software must be distributed under this same
+license. Independent code that does not contain or derive from the
+Software may retain its own license, but applications incorporating the
+Software remain subject to section 3. Do not impose terms that prevent
+recipients from exercising the permissions granted here.
+
+5. Third-party rights and names
+Nothing in this license limits rights granted under a third-party
+license, including rights to modify or replace LGPL-covered components
+and reverse engineer for debugging such modifications. This license
+does not grant rights to third-party recordings or imply endorsement
+by the original authors. No trademark rights are granted.
+
+6. Termination
+Permission under this license terminates if you violate its terms. It
+is reinstated if you remedy the violation within 30 days after first
+receiving written notice of it, unless the same violation recurs.
+Recipients who comply with this license retain their permissions.
+
+7. No warranty or liability
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, AND NON INFRINGEMENT. TO THE MAXIMUM EXTENT
+PERMITTED BY APPLICABLE LAW, THE AUTHORS AND COPYRIGHT HOLDERS SHALL
+NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+For separate permission covering paid applications or distribution,
+contact matt@adroited.com.

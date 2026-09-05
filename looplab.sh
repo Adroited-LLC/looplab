@@ -1,0 +1,6 @@
+#!/bin/bash
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+source "$HOME/.cargo/env"
+cd "$(dirname "$0")"
+npm run tauri dev

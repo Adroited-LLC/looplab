@@ -1,0 +1,31 @@
+{
+  "name": "looplab",
+  "private": true,
+  "version": "0.4.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:build": "APPIMAGE_EXTRACT_AND_RUN=1 NO_STRIP=1 tauri build && bash patch-appimage.sh"
+  },
+  "dependencies": {
+    "@spotify/basic-pitch": "^1.0.1",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2.6.0",
+    "@tauri-apps/plugin-fs": "^2.4.5",
+    "@tauri-apps/plugin-opener": "^2",
+    "@tauri-apps/plugin-store": "^2.4.2",
+    "soundtouchjs": "^0.3.0",
+    "wavesurfer.js": "^7.12.1",
+    "web-audio-beat-detector": "^8.2.35"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}
