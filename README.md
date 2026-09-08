@@ -35,6 +35,18 @@ npm run dev
 
 Use Node.js 22 or newer. For desktop development, install Rust and the platform prerequisites for Tauri 2 (including WebKitGTK 4.1 on Linux), then run `npm run tauri dev`. Frontend build: `npm run build`.
 
+### Windows x64
+
+LoopLab uses Microsoft Edge WebView2 on Windows. The per-user NSIS installer includes the WebView2 bootstrapper, which installs the runtime if needed (an internet connection is required for that step). The installer is currently unsigned.
+
+To build on Windows, install Node.js 22 or newer, Rust with the `x86_64-pc-windows-msvc` toolchain, and Visual Studio Build Tools with **Desktop development with C++** and a Windows SDK. Open PowerShell as your normal Windows user in the checkout and run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build-windows.ps1
+```
+
+The script installs locked dependencies, runs the regression tests, and builds an installer in `src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/`. You can also run `npm run build:windows` for a build using your default Rust target. The Linux AppImage patch script is not used on Windows.
+
 ### Linux AppImage
 
 The packaging helper targets Fedora x86_64 with WebKitGTK 4.1 installed:
